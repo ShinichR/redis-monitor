@@ -2,6 +2,21 @@ var intervalTime = 1100; //监控频率
 var is_start = true; //已经开始监控
 var chart_data_length = 256; //图上的点数
 
+function _to_time_format(s) {
+	s = s + '';
+	var l = (s + '').length;
+	if (l == 1) return '0' + s;
+	else if (l == 2) return s;
+	else return '00';
+}
+//当前时间，24h
+function current_time(d) {
+	if (d == null || d == 'undefine') {
+		d = new Date();
+	}
+	return _to_time_format(d.getHours()) + ':' + _to_time_format(d.getMinutes()) + ':' + _to_time_format(d.getSeconds());
+}
+
 function monitor_task() {
 	if (is_start) {
 		get_server_data();
@@ -45,7 +60,7 @@ function fill_data_table(data) {
 }
 
 function do_redis_status(data) {
-	var x_date = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+	var x_date = current_time();
 	if (data.success == 1) {
 		fill_data_table(data.data);
 		//update charts
@@ -171,8 +186,8 @@ function get_line_option(text, subtext, legend, yAxis_name, y_format) {
                 var res = [];
                 var len = chart_data_length;
                 while (len--) {
-                    res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-                    now = new Date(now - 2000);
+                    res.unshift(current_time(now));
+                    now = new Date(now - intervalTime);
                 }
                 return res;
             })()
