@@ -21,7 +21,7 @@ class RedisMonitor(object):
         '''
         self.timeout = timeout #数据过期时间
         self.servers = {}
-        self.redis_requesting = False #全局控制请求，尽量减少请求数
+        self.redis_requesting = {} #全局控制请求，尽量减少请求数
         
     def _md5(self, s):
         '''
@@ -53,7 +53,7 @@ class RedisMonitor(object):
     def new_request(self, key, host, port, password, charset = 'utf8'):
         redis_rst = {}
         #需要重新请求获得数据
-        self.redis_requesting = True
+        self.redis_requesting[key] = True
         try:
             start = time.time()
             
@@ -71,8 +71,11 @@ class RedisMonitor(object):
         self.servers[key] = {}
         self.servers[key]['time'] = time.time() #更新时间
         self.servers[key]['info'] = redis_rst
-        self.redis_requesting = False
-        
+        try:
+            #可能出现键值不存在的情况，捕获以下
+            self.redis_requesting.pop(key)
+        except:
+            pass
         return redis_rst
     
     def get_info(self, host, port, password, charset = 'utf8'):
@@ -81,7 +84,7 @@ class RedisMonitor(object):
             key = self._md5(host + str(port))
             #小于timeout，不用重新连接redis获取信息，直接拉缓存数据
             if key in self.servers.keys():
-                if self.redis_requesting:
+                if self.redis_requesting.get(key, False):
                     redis_rst = self.servers[key]['info']
                 else:
                     if time.time() - self.servers[key]['time'] < self.timeout:
@@ -90,7 +93,7 @@ class RedisMonitor(object):
                         #已经过期
                         redis_rst = self.new_request(key, host, port, password, charset)
             else:
-                if self.redis_requesting:
+                if self.redis_requesting.get(key, False):
                     redis_rst = {'success': 0, 'data': 'requesting'}
                 else:
                     #第一次请求数据
