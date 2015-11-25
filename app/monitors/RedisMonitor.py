@@ -36,7 +36,7 @@ class RedisMonitor(object):
             redis_rst = {}
             #需要重新请求获得数据
             try:
-                r = redis.Redis(host = host, port = port, password = password, db = 0)
+                r = redis.Redis(host = host, port = int(port), password = password)
                 r.info()
                 
                 redis_rst['success'] = 1
@@ -57,7 +57,7 @@ class RedisMonitor(object):
         try:
             start = time.time()
             
-            r = redis.Redis(host = host, port = port, password = password, db = 0)
+            r = redis.Redis(host = host, port = int(port), password = password)
             info = r.info()
             end = time.time();
             info['get_time'] = end - start
