@@ -8,8 +8,6 @@ from app.wraps.singleton_wrap import singleton
 import hashlib
 import time
 import redis
-import traceback
-
 
 
 @singleton
