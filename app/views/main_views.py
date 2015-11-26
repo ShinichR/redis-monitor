@@ -82,7 +82,6 @@ def flushall_redis():
         db = RequestUtil.get_parameter(request, 'db', 0)
         redis_info = redisinfo_dbs.get_redis(redis_md5)
         if redis_info:
-            rst = RedisMonitor().get_info(host = redis_info['redis_host'], port = redis_info['redis_port'], password = redis_info['redis_pass'])
             r = RedisUtil.flushall(redis_info['redis_host'], redis_info['redis_port'], redis_info['redis_pass'], db)
             if r:
                 rst = {'success': 1, 'data': ''}

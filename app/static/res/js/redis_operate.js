@@ -1,10 +1,10 @@
-function http_post(url, data, type, success) {
+function http_post(url, data, type, success_func) {
 	var ajax = $.ajax({
 		type: type,
 		url: url,
 		timeout: 5000,
 		data: data,
-		success: do_redis_status, 
+		success: success_func, 
 		dataType: 'json',
 		async: true,
 	});
