@@ -53,7 +53,7 @@ function fill_data_table(data) {
 		var db = 0;
 		if (key.substring(0, 2) == 'db') {
 			db = key.substring(2)
-			html = html + '<tr class="rb_td"><td colspan="2">'+key+'</td><td colspan="2">'+data[key].keys+'</td><td colspan="1">'+data[key].expires+'</td><td colspan="1">'+data[key].avg_ttl+'</td><td colspan="2"><input type="button" onclick="flush_redis(\'89be76fb6cfe7242c44ebb777aefcb22\', \'' + db + '\')" value="Flush DB"></td></tr>';
+			html = html + '<tr class="rb_td"><td colspan="2">'+key+'</td><td colspan="2">'+data[key].keys+'</td><td colspan="1">'+data[key].expires+'</td><td colspan="1">'+data[key].avg_ttl+'</td><td colspan="2"><input type="button" onclick="flush_redis(\'' + redis_md5 + '\', \'' + db + '\')" value="Flush DB"></td></tr>';
 		}
 	}
 	//删除已有的，append新增的
