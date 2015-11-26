@@ -6,7 +6,7 @@ Created on 2015年6月16日
 '''
 from app import app
 import flask
-from app.utils import RequestUtil, OtherUtil
+from app.utils import RequestUtil, OtherUtil, RedisUtil
 from flask.globals import request
 from app.monitors.RedisMonitor import RedisMonitor
 from app.dbs import redisinfo_dbs
@@ -73,7 +73,28 @@ def del_redis():
     else:
         rst = {'success': 0, 'data': 'del redis error'}
     return OtherUtil.object_2_dict(rst)
- 
+
+#redis flush all
+@app.route('/api/redis/flushall', methods=['GET', 'POST'])
+def flushall_redis():
+    try:
+        redis_md5 = RequestUtil.get_parameter(request, 'md5', '')
+        db = RequestUtil.get_parameter(request, 'db', 0)
+        redis_info = redisinfo_dbs.get_redis(redis_md5)
+        if redis_info:
+            rst = RedisMonitor().get_info(host = redis_info['redis_host'], port = redis_info['redis_port'], password = redis_info['redis_pass'])
+            r = RedisUtil.flushall(redis_info['redis_host'], redis_info['redis_port'], redis_info['redis_pass'], db)
+            if r:
+                rst = {'success': 1, 'data': ''}
+            else:
+                rst = {'success': 0, 'data': 'flush db error!'}
+        else:
+            rst = {'success': 0, 'data': 'not exist redis informations'}
+    except:
+        rst = {'success': 0, 'data': 'connect to redis error'}
+    return OtherUtil.object_2_dict(rst)
+
+
 #定义404页面
 @app.errorhandler(404)
 def page_not_found(error):

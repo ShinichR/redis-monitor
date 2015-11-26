@@ -60,7 +60,7 @@ class RedisMonitor(object):
             r = redis.Redis(host = host, port = int(port), password = password)
             info = r.info()
             end = time.time();
-            info['get_time'] = end - start
+            info['get_time'] = (end - start) * 1000 #change to ms 
             
             redis_rst['success'] = 1
             redis_rst['data'] = info
