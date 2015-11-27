@@ -29,11 +29,24 @@ redis监控程序很多，为什么还要自己做？
 
 ### How to Use ###
 
-1. 首先安装Flask Web需要得库
-> pip install -r requirements.txt 
+1. 首先安装python库
+	> pip install Flask
+	
+	> pip install requests
+	
+	> pip install redis
+	
+	> install sqlite3 environment, linux include.
 
 2. 运行web程序即可
-> ./run_monitor
+	
+	> ./run_monitor
+	
+	or
+	
+	> python run_monitor.py
+	
+	PS: change run_monitor mode to 755.
 
 3. 本地打开127.0.0.1:7259就可以看完网页了。截图见下方！
 
