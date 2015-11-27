@@ -33,25 +33,25 @@ Because I clone so many program, but all exist difficult, cause by below:
 1. git clone https://github.com/hustcc/redis-monitor.git
 2. install the environment, so easy, if you are a pythoner, I believe you can skip this step.
 
-> pip install Flask
-
-> pip install requests
-
-> pip install redis
-
-> pip install sqlite3
+	> pip install Flask
+	
+	> pip install requests
+	
+	> pip install redis
+	
+	> pip install sqlite3
 
 3. start up
 
-> ./run_monitor
+	> ./run_monitor
+	
+	or
+	
+	> python run_monitor.py
+	
+	PS: change run_monitor mode to 755.
 
-or
-
-> python run_monitor.py
-
-PS: change run_monitor mode to 755.
-
-3. Open in browser 127.0.0.1:7259, then you will see it.
+4. Open in browser 127.0.0.1:7259, then you will see it.
 
 ### screenshot ###
 
