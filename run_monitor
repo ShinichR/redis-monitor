@@ -1,4 +1,4 @@
-pids=$(ps -ef|grep gunicorn|grep run_monitor|awk {'print $2,$3'})
+pids=$(ps -ef|grep run_monitor|awk {'print $2,$3'})
 pidsArray=($pids)
 
 len=${#pidsArray[*]}
@@ -8,4 +8,4 @@ for ((index=0;index<$len;index+=1));do
     kill -9 ${pidsArray[$index]}
 done
 sleep 1
-nohup gunicorn --worker-class=gevent -w 4 -b 0.0.0.0:7259 run_monitor:app &
+nohup python run_monitor.py &

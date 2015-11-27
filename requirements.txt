@@ -1,6 +1,4 @@
 Flask
 requests
 redis
-gunicorn
-gevent
 sqlite3
