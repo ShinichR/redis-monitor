@@ -39,8 +39,18 @@ redis监控程序很多，为什么还要自己做？
 
 ### screenshot ###
 
+ - basic information
+
 ![shot_1](/doc/shot/shot_1.png)
+
+ - connection time gragh
 
 ![shot_2](/doc/shot/shot_2.png)
 
+ - ops time gragh
+
 ![shot_3](/doc/shot/shot_3.png)
+
+ - cpu and mem
+
+![shot_3](/doc/shot/shot_4.png)

@@ -41,8 +41,7 @@ Because I clone so many program, but all exist difficult, cause by below:
 
 > pip install sqlite3
 
-
-2. 运行web程序即可
+3. start up
 
 > ./run_monitor
 
@@ -56,9 +55,19 @@ PS: change run_monitor mode to 755.
 
 ### screenshot ###
 
+ - basic information
+
 ![shot_1](/doc/shot/shot_1.png)
+
+ - connection time gragh
 
 ![shot_2](/doc/shot/shot_2.png)
 
+ - ops time gragh
+
 ![shot_3](/doc/shot/shot_3.png)
+
+ - cpu and mem
+
+![shot_3](/doc/shot/shot_4.png)
 
