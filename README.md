@@ -9,10 +9,10 @@ Welcome to issue and push request. [https://github.com/hustcc/redis-monitor](htt
 The monitor data include: ga
 
  - the redis server infomation, include redis version, online time, online time, os version and information, and so on.
- - the realtime cmd exec infomation, such as ops, connected count, and so on.
- - the realtime gragh of the connect time.
- - the realtime graph of ops.
- - the realtime grash of cpu and mem usage.
+ - realtime cmd exec infomation, such as ops, connected count, and so on.
+ - realtime gragh of the connect time.
+ - realtime gragh of ops.
+ - realtime gragh of cpu and mem usage.
  - some simple operate, such as flushdb and add key-velue.
  
  
@@ -67,7 +67,7 @@ Because I clone so many program, but all exist difficult, cause by below:
 
 ![shot_3](/doc/shot/shot_3.png)
 
- - cpu and mem
+ - cpu and mem gragh
 
 ![shot_3](/doc/shot/shot_4.png)
 
