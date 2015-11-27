@@ -2,11 +2,13 @@
 
 A web visualization redis monitoring program. Performance optimized and very easy to install and deploy, base on Flask and sqlite. the monitor data come from redis.info().
 
+Demo Site: [http://redis-monitor.atool.org/](http://redis-monitor.atool.org/)
+
 Welcome to issue and push request. [https://github.com/hustcc/redis-monitor](https://github.com/hustcc/redis-monitor) 
 
 ### What ###
 
-The monitor data include: ga
+The monitor data include: 
 
  - the redis server infomation, include redis version, online time, online time, os version and information, and so on.
  - realtime cmd exec infomation, such as ops, connected count, and so on.

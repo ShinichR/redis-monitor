@@ -1,6 +1,8 @@
 ## redis-monitor ##
 
-一个web可视化的redis监控程序。
+一个web可视化，性能优化的redis监控程序，使用flask + sqlite完成。
+
+Demo Site: [http://redis-monitor.atool.org/](http://redis-monitor.atool.org/)
 
 欢迎issue和pr。[https://github.com/hustcc/redis-monitor](https://github.com/hustcc/redis-monitor) 
 
