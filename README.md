@@ -39,7 +39,7 @@ Because I clone so many program, but all exist difficult, cause by below:
 	
 	> pip install redis
 	
-	> pip install sqlite3
+	> install sqlite3 environment, linux include.
 
 3. start up
 
