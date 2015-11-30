@@ -295,10 +295,10 @@ require([
     function(ec) {
 		echarts = ec;
 		
-		timechart = draw_chart('time_chart', get_line_option('Redis实时联通情况', '', ['连接耗时'], '时间', 'ms'));
-		opschart = draw_chart('ops_chart', get_line_option('Redis每秒处理命令数', '', ['OPS'], '命令条数', ''));
-		memchart = draw_chart('mem_chart', get_line_option('Redis内存实时占用情况', '', ['Redis内存占用', '系统分配内存'], '内存占用', ' Kb'));
-		cpuchart = draw_chart('cpu_chart', get_line_option('Redis实时CPU占用情况', '', ['cpu_user', 'cpu_sys', 'cpu_user_children', 'cpu_sys_children'], 'CPU消耗', ''));
+		timechart = draw_chart('time_chart', get_line_option('Redis Connect Time', '', ['time'], 'Time', 'ms'));
+		opschart = draw_chart('ops_chart', get_line_option('Redis Command Per Second', '', ['OPS'], 'Cmd count', ''));
+		memchart = draw_chart('mem_chart', get_line_option('Redis Mem Usage', '', ['used_memory', 'used_memory_rss'], 'Mem Usage', ' Kb'));
+		cpuchart = draw_chart('cpu_chart', get_line_option('Redis Cpu Usage', '', ['cpu_user', 'cpu_sys', 'cpu_user_children', 'cpu_sys_children'], 'Cpu Usage', ''));
 		//开启监控
 		var r = check_redis_exist();
 		if (r) {
