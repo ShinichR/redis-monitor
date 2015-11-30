@@ -16,6 +16,7 @@ The monitor data include:
  - realtime gragh of ops.
  - realtime gragh of cpu and mem usage.
  - some simple operate, such as flushdb and add key-velue.
+ - redis role, include master and slaves.
  
  
 ### Why ###
