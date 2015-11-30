@@ -60,3 +60,5 @@ target/
 .settings/
 
 redis_info.db
+nohup.out
+
