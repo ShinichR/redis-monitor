@@ -53,9 +53,9 @@
                 </tr>
                 <tr>
                     <td id="redis_version"></td>
-                    <td id="os" colspan="3"></td>
+                    <td id="os" colspan="2"></td>
                     <td id="process_id"></td>
-                    <td id="uptime_in_seconds"></td>
+                    <td id="uptime_in_seconds" colspan="2"></td>
                     <td id="connected_clients" class="star"></td>
                     <td id="blocked_clients" class="star"></td>
                 </tr>
@@ -82,10 +82,29 @@
                     <td id="keyspace_hits"></td>
                     <td id="keyspace_misses"></td>
                 </tr>
-            	<tr class="th_group">
-            		<th colspan="8">Redis DB</th>
+                <tr class="th_group">
+            		<th colspan="8" id="role_header">Redis master / slave</th>
             	</tr>
-                <tr>
+                <tr id="redis_master_header" class="role_master">
+                    <th colspan="1">slave</th>
+                    <th colspan="5">slave host:port</th>
+                    <th colspan="2">status</th>
+                </tr>
+                <tr id="redis_slave_header" class="role_slave">
+                    <th colspan="1">priority</th>
+                    <td colspan="1" id="slave_priority"></td>
+                    <th colspan="1">read_only</th>
+                    <td colspan="1" id="slave_read_only"></td>
+                    <th colspan="1">master_sync</th>
+                    <td colspan="1" id="master_sync_in_progress"></td>
+                    <th colspan="1">connected_slaves</th>
+                    <td colspan="1" id="connected_slaves"></td>
+                    
+                </tr>
+            	<tr class="th_group">
+            		<th colspan="8" id="redis_dn_title">Redis DB</th>
+            	</tr>
+                <tr id="redis_db_header">
                     <th colspan="2">DB</th>
                     <th colspan="2">keys</th>
                     <th colspan="1">expires</th>

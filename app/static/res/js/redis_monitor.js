@@ -36,11 +36,43 @@ function sec_2_hour(sec) {
 function fill_data_table(data) {
 	var keys = ['redis_version', 'os', 'process_id', 'uptime_in_seconds', 'connected_clients', 'blocked_clients',   
 	            'total_connections_received', 'total_commands_processed', 'instantaneous_ops_per_sec', 'rejected_connections', 'expired_keys', 'evicted_keys', 'keyspace_hits', 'keyspace_misses']
+	//判断role信息，做不同的处理
+	if ('master' == data['role'] || 'slave' == data['role']) {
+		$('.role_' + data['role']).show();
+		if (data['role'] == 'master') {
+			//遍历slave信息
+			var html = "";
+			var slave_info = null;
+			var cnt = 0;
+			for (var key in data) {
+				if (key.substring(0, 5) == 'slave') {
+					cnt ++;
+					data[key] =  data[key].split(',');
+					html = html + '<tr class="role_master_data"><td>'+key+'</td><td colspan="5">'+ data[key][0] + ':' + data[key][1] +'</td><td colspan="2">'+ data[key][2] +'</td></tr>';
+				}
+			}
+			if (cnt == 0) {
+				html = '<tr class="role_master_data"><td colspan="8" align="center">There has no redis slave.</td></tr>';
+			}
+			$('#role_header').text('Redis role [ master ], has ' + cnt + ' slaves');
+			//删除已有的，append新增的
+			$('.role_master_data').remove();
+			$('#redis_master_header').after(html);
+		}
+		else {
+			var slave_keys = ['slave_priority', 'slave_read_only', 'master_sync_in_progress', 'connected_slaves']
+			for (var i in slave_keys) {
+				$('#' + slave_keys[i]).text(data[slave_keys[i]]);
+			}
+			$('#role_header').text('Redis role [ slave ], master is ' + data['master_host'] + ':' + data['master_port']);
+		}
+	}
+	
 	var key = null;
 	for (var i in keys) {
 		key = keys[i];
 		if (key == 'uptime_in_seconds') {
-			$('#' + key).text(sec_2_hour(data[key]));
+			$('#' + key).text(sec_2_hour(data[key]) + ' / ' + data['uptime_in_days'] + ' Days');
 		}
 		else {
 			$('#' + key).text(data[key]);
@@ -49,16 +81,22 @@ function fill_data_table(data) {
 	
 	//遍历key中以db开头的，标示不同的数据库
 	var html = "";
+	var cnt = 0;
 	for (var key in data) {
 		var db = 0;
 		if (key.substring(0, 2) == 'db') {
+			cnt ++;
 			db = key.substring(2)
 			html = html + '<tr class="rb_td"><td colspan="2">'+key+'</td><td colspan="2">'+data[key].keys+'</td><td colspan="1">'+data[key].expires+'</td><td colspan="1">'+data[key].avg_ttl+'</td><td colspan="2"><input type="button" onclick="flush_redis(\'' + redis_md5 + '\', \'' + db + '\')" value="Flush DB"></td></tr>';
 		}
 	}
+	if (cnt == 0) {
+		html = '<tr class="rb_td"><td colspan="8" align="center">There has no redis database.</td></tr>';
+	}
 	//删除已有的，append新增的
+	$('#redis_dn_title').text('Redis DB, totle db: ' + cnt);
 	$('tr.rb_td').remove();
-	$('#data_table tbody').append(html);
+	$('#redis_db_header').after(html);
 }
 
 function do_redis_status(data) {
