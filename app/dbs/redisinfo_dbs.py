@@ -6,6 +6,7 @@ Created on 2015年11月24日
 '''
 from app.dbs.sqlite_utils import SqliteHandler
 from app.utils import StringUtil, DateUtil
+import time
 
 
 def get_all_redis():
@@ -43,14 +44,41 @@ def delete_redis(md5):
     params = (md5, )
     return SqliteHandler().exec_update(sql, params)
 
+redis_cache = {
 
-def get_redis(md5):
+}
+
+cache_timeout = 60 # 1 min
+def get_redis(md5, cache = True):
     '''
     info: get one redis information
+    add db cache, because the data is request so many time
     '''
+    r_info = None
+    
+    global redis_cache, cache_timeout
+    if cache:
+        redis_info = redis_cache.get(md5)
+        if md5 in redis_cache.keys() and redis_info and time.time() - redis_info.get('time', 0) <= cache_timeout:
+            r_info = redis_info.get('data', None)
+            return r_info
+    #每次timeout的时候，清点缓存，防止内存泄露
+    keys = redis_cache.keys()
+    for k in keys:
+        curr = time.time()
+        r = redis_cache.get(k)
+        if r and curr - r.get('time', 0) > cache_timeout:
+            redis_cache.pop(k)
+
     sql = "select * from redis_info where md5 = ?"
     params = (md5, )
-    return SqliteHandler().exec_select_one(sql, params)
+    r_info = SqliteHandler().exec_select_one(sql, params)
+    redis_info = {
+        'time': time.time(),
+        'data': r_info
+    }
+    redis_cache[md5] = redis_info
+    return r_info
 
 
 def create_tables():
