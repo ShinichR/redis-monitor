@@ -22,9 +22,12 @@ def add_redis(host, port, psw, email):
     '''
     info: 添加一个redis信息到数据库
     '''
+    global redis_cache
+    
     add_time = DateUtil.now_datetime()
     md5 = StringUtil.md5(host + str(port))
     r = get_redis(md5)
+    redis_cache = {} #清楚缓存
     if r:
         #存在，update
         sql = "update redis_info set redis_host = ?, redis_port = ?, redis_pass = ?, email = ?, add_time = ? where md5 = ?"
@@ -40,6 +43,8 @@ def delete_redis(md5):
     '''
     info: delete redis information from db
     '''
+    global redis_cache
+    redis_cache = {}
     sql = "delete from redis_info where md5 = ?"
     params = (md5, )
     return SqliteHandler().exec_update(sql, params)
@@ -58,7 +63,7 @@ def get_redis(md5, cache = True):
     
     global redis_cache, cache_timeout
     if cache:
-        redis_info = redis_cache.get(md5)
+        redis_info = redis_cache.get(md5, None)
         if md5 in redis_cache.keys() and redis_info and time.time() - redis_info.get('time', 0) <= cache_timeout:
             r_info = redis_info.get('data', None)
             return r_info
