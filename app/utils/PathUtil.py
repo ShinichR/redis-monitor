@@ -2,7 +2,7 @@
 '''
 Created on 2015年2月5日
 
-@author: hzwangzhiwei
+@author: hustcc
 '''
 import os
 import sys

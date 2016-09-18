@@ -2,7 +2,7 @@
 '''
 Created on 2015年6月16日
 
-@author: hzwangzhiwei
+@author: hustcc
 '''
 from app import app
 import flask

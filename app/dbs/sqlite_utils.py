@@ -2,7 +2,7 @@
 '''
 Created on 2015年10月27日
 数据库操作类
-@author: hzwangzhiwei
+@author: hustcc
 '''
 import sqlite3
 

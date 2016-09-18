@@ -2,7 +2,7 @@
 '''
 Created on 2015年9月2日
 
-@author: hzwangzhiwei
+@author: hustcc
 '''
 from app.wraps.singleton_wrap import singleton
 import hashlib

@@ -2,7 +2,7 @@
 '''
 Created on 2015年5月6日
 
-@author: hzwangzhiwei
+@author: hustcc
 '''
 from app import app
 

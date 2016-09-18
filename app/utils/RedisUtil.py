@@ -2,7 +2,7 @@
 '''
 Created on 2015年11月26日
 一些reids的操作类，用于执行网页前段发送的redis命令
-@author: hzwangzhiwei
+@author: hustcc
 '''
 import redis
 

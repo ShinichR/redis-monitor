@@ -2,7 +2,7 @@
 '''
 Created on 2015年11月24日
 
-@author: hzwangzhiwei
+@author: hustcc
 '''
 from app.dbs.sqlite_utils import SqliteHandler
 from app.utils import StringUtil, DateUtil
